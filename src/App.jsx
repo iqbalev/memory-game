@@ -1,35 +1,75 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import fetchAPI from "./services/fetchAPI";
+import Header from "./components/Header";
+import Main from "./components/Main";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [pokemonList, setPokemonList] = useState([]);
+  const [clickedPokemon, setClickedPokemon] = useState([]);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+
+  useEffect(() => {
+    async function getPokemon() {
+      const pokemon = await fetchAPI();
+      setPokemonList(pokemon);
+    }
+    getPokemon();
+  }, []);
+
+  function getShuffledPokemon(pokemonList) {
+    const pokemonListCopy = [...pokemonList];
+    for (let i = pokemonListCopy.length - 1; i > 1; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pokemonListCopy[i], pokemonListCopy[j]] = [
+        pokemonListCopy[j],
+        pokemonListCopy[i],
+      ];
+    }
+    return pokemonListCopy;
+  }
+
+  function shufflePokemonList() {
+    setPokemonList((prevPokemonList) => getShuffledPokemon(prevPokemonList));
+  }
+
+  function rememberClickedPokemon(pokemonId) {
+    setClickedPokemon((prevClickedPokemon) => [
+      ...prevClickedPokemon,
+      pokemonId,
+    ]);
+  }
+
+  function incrementScore() {
+    setScore((prevScore) => prevScore + 1);
+  }
+
+  function updateHighScore() {
+    setHighScore((prevHighScore) => Math.max(prevHighScore, score));
+  }
+
+  function resetGame() {
+    setClickedPokemon([]);
+    updateHighScore();
+    setScore(0);
+  }
+
+  function handleClick(pokemonId) {
+    if (!clickedPokemon.includes(pokemonId)) {
+      rememberClickedPokemon(pokemonId);
+      incrementScore();
+    } else {
+      resetGame();
+    }
+    shufflePokemonList();
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header score={score} highScore={highScore} />
+      <Main pokemonList={pokemonList} onClick={handleClick} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
