@@ -13,7 +13,7 @@ async function fetchAPI() {
       const result = await response.json();
       const pokemonId = result.id;
       const pokemonName = result.forms[0].name;
-      const pokemonImg = result.sprites.front_default;
+      const pokemonImg = result.sprites.other["official-artwork"].front_default;
 
       pokemonData.push({
         id: pokemonId,
