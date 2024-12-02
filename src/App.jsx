@@ -10,6 +10,7 @@ function App() {
   const [clickedPokemon, setClickedPokemon] = useState([]);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     async function getPokemon() {
@@ -20,6 +21,16 @@ function App() {
     }
     getPokemon();
   }, []);
+
+  useEffect(() => {
+    if (isFlipped) {
+      const flipTimeout = setTimeout(() => {
+        setIsFlipped(false);
+      }, 500);
+
+      return () => clearTimeout(flipTimeout);
+    }
+  }, [isFlipped]);
 
   function getShuffledPokemon(pokemonList) {
     const pokemonListCopy = [...pokemonList];
@@ -52,6 +63,10 @@ function App() {
     setHighScore((prevHighScore) => Math.max(prevHighScore, score));
   }
 
+  function flipCard() {
+    setIsFlipped(true);
+  }
+
   function resetGame() {
     setClickedPokemon([]);
     updateHighScore();
@@ -66,6 +81,7 @@ function App() {
       resetGame();
     }
     shufflePokemonList();
+    flipCard();
   }
 
   return (
@@ -75,7 +91,11 @@ function App() {
       ) : (
         <>
           <Header score={score} highScore={highScore} />
-          <Main pokemonList={pokemonList} onClick={handleClick} />
+          <Main
+            pokemonList={pokemonList}
+            isFlipped={isFlipped}
+            onClick={handleClick}
+          />
         </>
       )}
     </div>
