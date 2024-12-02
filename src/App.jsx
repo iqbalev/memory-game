@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import fetchAPI from "./services/fetchAPI";
 import Header from "./components/Header";
+import Loader from "./components/Loader";
 import Main from "./components/Main";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [pokemonList, setPokemonList] = useState([]);
   const [clickedPokemon, setClickedPokemon] = useState([]);
   const [score, setScore] = useState(0);
@@ -11,8 +13,10 @@ function App() {
 
   useEffect(() => {
     async function getPokemon() {
+      setIsLoading(true);
       const pokemon = await fetchAPI();
       setPokemonList(pokemon);
+      setIsLoading(false);
     }
     getPokemon();
   }, []);
@@ -65,10 +69,16 @@ function App() {
   }
 
   return (
-    <>
-      <Header score={score} highScore={highScore} />
-      <Main pokemonList={pokemonList} onClick={handleClick} />
-    </>
+    <div className="app-container">
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <Header score={score} highScore={highScore} />
+          <Main pokemonList={pokemonList} onClick={handleClick} />
+        </>
+      )}
+    </div>
   );
 }
 
