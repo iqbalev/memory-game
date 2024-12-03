@@ -69,7 +69,6 @@ function App() {
 
   function resetGame() {
     setClickedPokemon([]);
-    updateHighScore();
     setScore(0);
   }
 
@@ -78,6 +77,7 @@ function App() {
       rememberClickedPokemon(pokemonId);
       incrementScore();
     } else {
+      updateHighScore();
       resetGame();
     }
     shufflePokemonList();
