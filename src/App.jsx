@@ -17,6 +17,7 @@ function App() {
       setIsLoading(true);
       const pokemon = await fetchAPI();
       setPokemonList(pokemon);
+      shufflePokemonList();
       setIsLoading(false);
     }
     getPokemon();
