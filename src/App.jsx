@@ -27,7 +27,6 @@ function App() {
       const flipTimeout = setTimeout(() => {
         setIsFlipped(false);
       }, 500);
-
       return () => clearTimeout(flipTimeout);
     }
   }, [isFlipped]);
@@ -59,7 +58,7 @@ function App() {
     setScore((prevScore) => prevScore + 1);
   }
 
-  function updateHighScore() {
+  function updateHighScore(score) {
     setHighScore((prevHighScore) => Math.max(prevHighScore, score));
   }
 
@@ -74,11 +73,20 @@ function App() {
 
   function handleClick(pokemonId) {
     if (!clickedPokemon.includes(pokemonId)) {
+      const clickedPokemonCopy = [...clickedPokemon, pokemonId];
       rememberClickedPokemon(pokemonId);
       incrementScore();
+      const finalScore = score + 1;
+
+      if (clickedPokemonCopy.length === pokemonList.length) {
+        updateHighScore(finalScore);
+        resetGame();
+        console.log("You Win!");
+      }
     } else {
-      updateHighScore();
+      updateHighScore(score);
       resetGame();
+      console.log("You Lose!");
     }
     shufflePokemonList();
     flipCard();
