@@ -1,10 +1,11 @@
 import capitalize from "../utils/capitalize";
+import selectDifficulty from "../utils/selectDifficulty";
 
-async function fetchAPI() {
+async function fetchAPI(difficulty) {
   const pokemonData = [];
 
   try {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= selectDifficulty(difficulty); i++) {
       const id = i;
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
 

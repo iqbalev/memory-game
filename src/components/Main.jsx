@@ -1,8 +1,16 @@
 import Card from "./Card";
+import Difficulty from "./Difficulty";
 
-function Main({ pokemonList, isFlipped, onClick }) {
+function Main({
+  pokemonList,
+  difficulty,
+  changeDifficulty,
+  isFlipped,
+  onClick,
+}) {
   return (
-    <main>
+    <main className="main">
+      <Difficulty difficulty={difficulty} changeDifficulty={changeDifficulty} />
       <Card pokemonList={pokemonList} isFlipped={isFlipped} onClick={onClick} />
     </main>
   );

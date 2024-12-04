@@ -1,0 +1,44 @@
+.difficulty-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.difficulty-section .heading-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.difficulty-section .heading {
+  font-weight: normal;
+}
+
+.difficulty-section .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.difficulty-section button,
+.difficulty-section span {
+  background-color: #383838;
+  color: #fff;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+.difficulty-section button {
+  border: transparent;
+  cursor: pointer;
+}
+
+.difficulty-section button:hover {
+  opacity: 80%;
+}
+
+.difficulty-section span {
+  text-transform: capitalize;
+}

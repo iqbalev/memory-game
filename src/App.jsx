@@ -7,21 +7,22 @@ import Main from "./components/Main";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [pokemonList, setPokemonList] = useState([]);
+  const [difficulty, setDifficulty] = useState("very easy");
   const [clickedPokemon, setClickedPokemon] = useState([]);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     async function getPokemon() {
       setIsLoading(true);
-      const pokemon = await fetchAPI();
+      const pokemon = await fetchAPI(difficulty);
       setPokemonList(pokemon);
       shufflePokemonList();
       setIsLoading(false);
     }
     getPokemon();
-  }, []);
+  }, [difficulty]);
 
   useEffect(() => {
     if (isFlipped) {
@@ -44,6 +45,12 @@ function App() {
     return pokemonListCopy;
   }
 
+  function changeDifficulty(difficulty) {
+    resetGame();
+    setHighScore(0);
+    setDifficulty(difficulty);
+  }
+
   function shufflePokemonList() {
     setPokemonList((prevPokemonList) => getShuffledPokemon(prevPokemonList));
   }
@@ -55,16 +62,16 @@ function App() {
     ]);
   }
 
+  function flipCard() {
+    setIsFlipped(true);
+  }
+
   function incrementScore() {
     setScore((prevScore) => prevScore + 1);
   }
 
   function updateHighScore(score) {
     setHighScore((prevHighScore) => Math.max(prevHighScore, score));
-  }
-
-  function flipCard() {
-    setIsFlipped(true);
   }
 
   function resetGame() {
@@ -102,6 +109,8 @@ function App() {
           <Header score={score} highScore={highScore} />
           <Main
             pokemonList={pokemonList}
+            difficulty={difficulty}
+            changeDifficulty={changeDifficulty}
             isFlipped={isFlipped}
             onClick={handleClick}
           />
