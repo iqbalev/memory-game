@@ -1,10 +1,15 @@
 import Scoreboard from "./Scoreboard";
+import "../styles/header.css";
 
-function Header({ score, highScore }) {
+function Header({ pokemonList, score, highScore }) {
   return (
     <header className="header">
       <h1 className="heading">Memory Game</h1>
-      <Scoreboard score={score} highScore={highScore} />
+      <Scoreboard
+        pokemonList={pokemonList}
+        score={score}
+        highScore={highScore}
+      />
     </header>
   );
 }

@@ -11,7 +11,12 @@ function App() {
   const [clickedPokemon, setClickedPokemon] = useState([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
+  const [highScore, setHighScore] = useState({
+    "very easy": 0,
+    easy: 0,
+    medium: 0,
+    hard: 0,
+  });
 
   useEffect(() => {
     async function getPokemon() {
@@ -47,7 +52,6 @@ function App() {
 
   function changeDifficulty(difficulty) {
     resetGame();
-    setHighScore(0);
     setDifficulty(difficulty);
   }
 
@@ -71,7 +75,10 @@ function App() {
   }
 
   function updateHighScore(score) {
-    setHighScore((prevHighScore) => Math.max(prevHighScore, score));
+    setHighScore((prevHighScore) => ({
+      ...prevHighScore,
+      [difficulty]: Math.max(prevHighScore[difficulty], score),
+    }));
   }
 
   function resetGame() {
@@ -106,7 +113,11 @@ function App() {
         <Loader />
       ) : (
         <>
-          <Header score={score} highScore={highScore} />
+          <Header
+            pokemonList={pokemonList}
+            score={score}
+            highScore={highScore}
+          />
           <Main
             pokemonList={pokemonList}
             difficulty={difficulty}
