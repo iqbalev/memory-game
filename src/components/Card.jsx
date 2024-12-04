@@ -3,7 +3,7 @@ import "../styles/card.css";
 
 function Card({ pokemonList, isFlipped, onClick }) {
   return (
-    <div className="card-container">
+    <section className="card-section">
       {pokemonList.map((pokemon) => (
         <div
           className={`card ${isFlipped ? "flipped" : ""}`}
@@ -31,7 +31,7 @@ function Card({ pokemonList, isFlipped, onClick }) {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 }
 

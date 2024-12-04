@@ -1,14 +1,14 @@
-.card-container {
+.card-section {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 
-.card {
+.card-section .card {
   perspective: 1000px;
 }
 
-.card-front-back {
+.card-section .card-front-back {
   position: relative;
   width: 250px;
   height: 300px;
@@ -17,8 +17,8 @@
   cursor: pointer;
 }
 
-.card-front,
-.card-back {
+.card-section .card-front,
+.card-section .card-back {
   position: absolute;
   top: 0;
   left: 0;
@@ -28,7 +28,7 @@
   border-radius: 4px;
 }
 
-.card-front {
+.card-section .card-front {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -36,11 +36,11 @@
   background-color: #2c2c2c;
 }
 
-.pokemon-img {
+.card-section .pokemon-img {
   height: 140px;
 }
 
-.card-front p {
+.card-section .card-front .pokemon-name {
   writing-mode: vertical-rl;
   text-orientation: upright;
   background-color: #383838;
@@ -50,7 +50,7 @@
   text-align: center;
 }
 
-.card-back {
+.card-section .card-back {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,10 +58,10 @@
   background-color: #2c2c2c;
 }
 
-.pokemon-ball {
+.card-section .pokemon-ball {
   height: 120px;
 }
 
-.card.flipped .card-front-back {
+.card-section .card.flipped .card-front-back {
   transform: rotateY(180deg);
 }

@@ -1,9 +1,9 @@
 function Scoreboard({ score, highScore }) {
   return (
-    <div className="scoreboard">
+    <section className="scoreboard-section">
       <p className="score">Score: {score}</p>
       <p className="high-score">High Score: {highScore}</p>
-    </div>
+    </section>
   );
 }
 
