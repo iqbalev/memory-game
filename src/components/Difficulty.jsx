@@ -3,9 +3,9 @@ import "../styles/difficulty.css";
 function Difficulty({ difficulty, changeDifficulty }) {
   return (
     <section className="difficulty-section">
-      <div className="heading-buttons">
+      <div className="heading-buttons-active">
         <h2 className="heading">Select Difficulty:</h2>
-        <div className="buttons">
+        <div className="buttons-active">
           <button
             className="button very-easy"
             onClick={() => changeDifficulty("very easy")}
@@ -30,12 +30,11 @@ function Difficulty({ difficulty, changeDifficulty }) {
           >
             Hard
           </button>
+          <p className="active-difficulty">
+            Active: <span>{difficulty}</span>
+          </p>
         </div>
       </div>
-
-      <p className="current-difficulty">
-        Current Difficulty: <span>{difficulty}</span>
-      </p>
     </section>
   );
 }

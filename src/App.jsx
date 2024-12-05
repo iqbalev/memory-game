@@ -3,6 +3,7 @@ import fetchAPI from "./services/fetchAPI";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
+import "./app.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -108,7 +109,7 @@ function App() {
   }
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${isLoading ? "loader" : ""}`}>
       {isLoading ? (
         <Loader />
       ) : (

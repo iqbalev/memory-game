@@ -8,8 +8,8 @@ function Scoreboard({ pokemonList, score, highScore }) {
       </p>
 
       <p className="high-score">
-        High Score: Very Easy - {highScore["very easy"]} | Easy -{" "}
-        {highScore.easy} | Medium - {highScore.medium} | Hard - {highScore.hard}
+        High Score | VE: {highScore["very easy"]} E: {highScore.easy} M:{" "}
+        {highScore.medium} H: {highScore.hard}
       </p>
     </section>
   );

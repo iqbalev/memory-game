@@ -1,5 +1,6 @@
 import Card from "./Card";
 import Difficulty from "./Difficulty";
+import "../styles/main.css";
 
 function Main({
   pokemonList,
