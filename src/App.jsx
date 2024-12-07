@@ -18,6 +18,8 @@ function App() {
     medium: 0,
     hard: 0,
   });
+  const [isWin, setIsWin] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function getPokemon() {
@@ -87,6 +89,15 @@ function App() {
     setScore(0);
   }
 
+  function setGameResult(isWin) {
+    setIsWin(isWin);
+    setShowModal(true);
+  }
+
+  function closeModal() {
+    setShowModal(false);
+  }
+
   function handleClick(pokemonId) {
     if (!clickedPokemon.includes(pokemonId)) {
       const clickedPokemonCopy = [...clickedPokemon, pokemonId];
@@ -97,12 +108,12 @@ function App() {
       if (clickedPokemonCopy.length === pokemonList.length) {
         updateHighScore(finalScore);
         resetGame();
-        console.log("You Win!");
+        setGameResult(true);
       }
     } else {
       updateHighScore(score);
       resetGame();
-      console.log("You Lose!");
+      setGameResult(false);
     }
     shufflePokemonList();
     flipCard();
@@ -125,6 +136,9 @@ function App() {
             changeDifficulty={changeDifficulty}
             isFlipped={isFlipped}
             onClick={handleClick}
+            isWin={isWin}
+            showModal={showModal}
+            closeModal={closeModal}
           />
         </>
       )}
