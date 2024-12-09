@@ -8,15 +8,15 @@ import "./app.css";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [pokemonList, setPokemonList] = useState([]);
-  const [difficulty, setDifficulty] = useState("very easy");
+  const [difficulty, setDifficulty] = useState("medium");
   const [clickedPokemon, setClickedPokemon] = useState([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState({
-    "very easy": 0,
     easy: 0,
     medium: 0,
     hard: 0,
+    expert: 0,
   });
   const [isWin, setIsWin] = useState(false);
   const [showModal, setShowModal] = useState(false);

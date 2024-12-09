@@ -7,12 +7,6 @@ function Difficulty({ difficulty, changeDifficulty }) {
         <h2 className="heading">Select Difficulty:</h2>
         <div className="buttons-active">
           <button
-            className="button very-easy"
-            onClick={() => changeDifficulty("very easy")}
-          >
-            Very Easy
-          </button>
-          <button
             className="button easy"
             onClick={() => changeDifficulty("easy")}
           >
@@ -29,6 +23,12 @@ function Difficulty({ difficulty, changeDifficulty }) {
             onClick={() => changeDifficulty("hard")}
           >
             Hard
+          </button>
+          <button
+            className="button expert"
+            onClick={() => changeDifficulty("expert")}
+          >
+            Expert
           </button>
           <p className="active-difficulty">
             Active: <span>{difficulty}</span>

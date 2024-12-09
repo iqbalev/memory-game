@@ -1,15 +1,15 @@
 function selectDifficulty(difficulty) {
   switch (difficulty) {
-    case "very easy":
-      return 5;
     case "easy":
-      return 10;
+      return 5;
     case "medium":
-      return 15;
+      return 10;
     case "hard":
+      return 15;
+    case "expert":
       return 20;
     default:
-      return 5;
+      return 10;
   }
 }
 
