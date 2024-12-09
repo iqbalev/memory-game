@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import fetchAPI from "./services/fetchAPI";
-import Header from "./components/Header";
 import Loader from "./components/Loader";
+import Header from "./components/Header";
 import Main from "./components/Main";
+import Footer from "./components/Footer";
 import "./app.css";
 
 function App() {
@@ -140,6 +141,7 @@ function App() {
             showModal={showModal}
             closeModal={closeModal}
           />
+          <Footer />
         </>
       )}
     </div>
