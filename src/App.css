@@ -1,11 +1,11 @@
 .app-container,
-.app-container.loader {
+.app-container.loading {
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.app-container.loader {
+.app-container.loading {
   justify-content: center;
   align-items: center;
 }

@@ -1,12 +1,21 @@
 import Scoreboard from "./Scoreboard";
 import "../styles/header.css";
 
-function Header({ pokemonList, score, highScore }) {
+function Header({
+  pokemonList,
+  difficulty,
+  score,
+  highScore,
+  backToStartScreen,
+}) {
   return (
     <header className="header">
-      <h1 className="heading">Pokémon: A Memory Game</h1>
+      <h1 className="heading" role="button" onClick={backToStartScreen}>
+        Pokémon: A Memory Game
+      </h1>
       <Scoreboard
         pokemonList={pokemonList}
+        difficulty={difficulty}
         score={score}
         highScore={highScore}
       />

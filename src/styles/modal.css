@@ -1,4 +1,6 @@
-.modal-container {
+.result-modal-container,
+.leaderboard-modal-container,
+.how-to-play-modal-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +12,9 @@
   background-color: #242424d9;
 }
 
-.modal-container .modal {
+.result-modal-container .modal,
+.leaderboard-modal-container .modal,
+.how-to-play-modal-container .modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,12 +26,21 @@
   background-color: #2c2c2c;
 }
 
-.modal-container .result {
-  font-size: 2rem;
+.result-modal-container .result,
+.how-to-play-modal-container .rules,
+.leaderboard-modal-container .high-score-list {
+  font-size: 1.6rem;
   color: #ffffffde;
 }
 
-.modal-container button {
+.leaderboard-modal-container .high-score-list {
+  list-style: none;
+  padding: 0;
+}
+
+.result-modal-container button,
+.how-to-play-modal-container button,
+.leaderboard-modal-container button {
   border-radius: 4px;
   padding: 8px;
   border: transparent;
@@ -37,6 +50,8 @@
   font-size: 1.2rem;
 }
 
-.modal-container button:hover {
+.result-modal-container button:hover,
+.how-to-play-modal-container button:hover,
+.leaderboard-modal-container button:hover {
   opacity: 80%;
 }

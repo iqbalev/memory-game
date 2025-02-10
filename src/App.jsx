@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import fetchAPI from "./services/fetchAPI";
-import Loader from "./components/Loader";
-import Header from "./components/Header";
-import Main from "./components/Main";
+import LoadingScreen from "./pages/LoadingScreen";
+import StartScreen from "./pages/StartScreen";
+import GameScreen from "./pages/GameScreen";
 import Footer from "./components/Footer";
 import "./app.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [pokemonList, setPokemonList] = useState([]);
-  const [difficulty, setDifficulty] = useState("medium");
+  const [difficulty, setDifficulty] = useState(null);
   const [clickedPokemon, setClickedPokemon] = useState([]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
@@ -20,7 +20,9 @@ function App() {
     expert: 0,
   });
   const [isWin, setIsWin] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [isResultModalOpen, setIsResultModalOpen] = useState(false);
+  const [isLeaderboardModalOpen, setIsLeaderboardModalOpen] = useState(false);
+  const [isHowToPlayModalOpen, setIsHowToPlayModalOpen] = useState(false);
 
   useEffect(() => {
     async function getPokemon() {
@@ -92,11 +94,31 @@ function App() {
 
   function setGameResult(isWin) {
     setIsWin(isWin);
-    setShowModal(true);
+    setIsResultModalOpen(true);
   }
 
-  function closeModal() {
-    setShowModal(false);
+  function closeResultModal() {
+    setIsResultModalOpen(false);
+  }
+
+  function showHowToPlayModal() {
+    setIsHowToPlayModalOpen(true);
+  }
+
+  function closeHowToPlayModal() {
+    setIsHowToPlayModalOpen(false);
+  }
+
+  function showLeaderboardModal() {
+    setIsLeaderboardModalOpen(true);
+  }
+
+  function closeLeaderboardModal() {
+    setIsLeaderboardModalOpen(false);
+  }
+
+  function backToStartScreen() {
+    setDifficulty(null);
   }
 
   function handleClick(pokemonId) {
@@ -121,25 +143,34 @@ function App() {
   }
 
   return (
-    <div className={`app-container ${isLoading ? "loader" : ""}`}>
+    <div className={`app-container ${isLoading ? "loading" : ""}`}>
       {isLoading ? (
-        <Loader />
+        <LoadingScreen />
+      ) : !difficulty ? (
+        <StartScreen
+          difficulty={difficulty}
+          changeDifficulty={changeDifficulty}
+          highScore={highScore}
+          isLeaderboardModalOpen={isLeaderboardModalOpen}
+          showLeaderboardModal={showLeaderboardModal}
+          closeLeaderboardModal={closeLeaderboardModal}
+          isHowToPlayModalOpen={isHowToPlayModalOpen}
+          showHowToPlayModal={showHowToPlayModal}
+          closeHowToPlayModal={closeHowToPlayModal}
+        />
       ) : (
         <>
-          <Header
-            pokemonList={pokemonList}
-            score={score}
-            highScore={highScore}
-          />
-          <Main
+          <GameScreen
             pokemonList={pokemonList}
             difficulty={difficulty}
-            changeDifficulty={changeDifficulty}
+            score={score}
+            highScore={highScore}
             isFlipped={isFlipped}
-            onClick={handleClick}
+            handleClick={handleClick}
             isWin={isWin}
-            showModal={showModal}
-            closeModal={closeModal}
+            isResultModalOpen={isResultModalOpen}
+            closeResultModal={closeResultModal}
+            backToStartScreen={backToStartScreen}
           />
           <Footer />
         </>
